@@ -1,33 +1,7 @@
-# TI mmWave ROS Package (Customized)
+# rospkg
+### 项目介绍
 
-#### Auhor and Maintainer: Leo Zhang
-#### Organization: University of Arizona
-#### Email: dr.leo.zhang@outlook.com
----
-### Most recent change:
-
-Add support for XWR18XX devices. SDK version: 3.2.0.4.
-
----
-Initially derived from TI's origin ROS package in Industrial Toolbox 2.3.0 (new version available [Industrial Toolbox 2.5.2](http://dev.ti.com/tirex/#/?link=Software%2FmmWave%20Sensors%2FIndustrial%20Toolbox)).
-
-### Differences from origin TI's version:
-1. Added all radar parameters from calculations and can be read from `rosparam get`.
-2. Added Doppler data from detecting targets and form a customized ROS message `/ti_mmwave/radar_scan`.
-3. Added support for multiple radars working together.
-4. Added support for camera overlay (for sensor fusion).
-5. Working with xWR1443 and xWR1642 ES1.0 and ES2.0 (ES1.0 is deprecated from TI)
----
-### Available devices:
-```
-TI mmWave AWR1443BOOST
-TI mmWave AWR1642BOOST
-TI mmWave AWR1642BOOST ES2.0/3.0 EVM (not tested)
-TI mmWave AWR1642BOOST ES2.0 EVM
-TI mmWave AWR1843BOOST ES1.0 EVM
-```
----
-### Quick start guide (AWR1642BOOST ES2.0 EVM):
+### 使用说明(AWR1642BOOST ES2.0 EVM):
 1. Mount AWR1642BOOST ES2.0 EVM (as below), connect 5V/2.5A power supply and connect a micro-USB cable to host Ubuntu 16.04 LTS with [ROS Kinetic](http://wiki.ros.org/kinetic).
    
 ![](https://github.com/radar-lab/ti_mmwave_rospkg/raw/master/auxiliary/mounting.jpg "AWR1642 Mounting")
