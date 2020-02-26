@@ -1,45 +1,39 @@
 # rospkg
+---
 ### 项目介绍
-
+利用AWR1642毫米波雷达对多人进行跟踪,主要有以下两个方案:
+1. 方案一
+AWR1642接收到回波信号以后将数据通过UART传输到ROS节点,通过乒乓缓存将该数据保存到本地磁盘存储为csv格式,然后MATLAB通过共享文件夹形式读取到数据,对数据进行凝聚/跟踪处理,最终将数据绘制到界面上.(观察者模式)
+![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E6%96%B9%E6%B3%95%E4%B8%80.png)
+2. 方案二
+ARM通过共享内存方式获取到DSP得到的点云数据,在ARM上进行点迹凝聚和目标跟踪处理,最终通过串口将点云数据传输到本地电脑上,matlab进行界面绘制.
+![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E6%96%B9%E6%B3%95%E4%BA%8C.png)
+![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E7%A1%AC%E4%BB%B6%E5%B7%A6%E8%A7%86%E5%9B%BE.jpg)
 ### 使用说明(AWR1642BOOST ES2.0 EVM):
-1. Mount AWR1642BOOST ES2.0 EVM (as below), connect 5V/2.5A power supply and connect a micro-USB cable to host Ubuntu 16.04 LTS with [ROS Kinetic](http://wiki.ros.org/kinetic).
-   
-![](https://github.com/radar-lab/ti_mmwave_rospkg/raw/master/auxiliary/mounting.jpg "AWR1642 Mounting")
-
-Note: Tested with Ubuntu 16.04 LTS with ROS Kinectic and Ubuntu 18.04 LTS with [ROS Melodic](http://wiki.ros.org/melodic)
-
-2. Download SDK 2.0 or above (suggested SDK 2.1) from [here](http://www.ti.com/tool/MMWAVE-SDK) and use [UNIFLASH](http://www.ti.com/tool/UNIFLASH) to flash xwr16xx_mmw_demo.bin to your device. **Do not forget SOP2 jumper when flashing.**
-
-Note:
-AWR1642 ES1.0 (usually purchased before May 2018) uses SDK 1.2. AWR1642 ES2.0 (usually purchased after May 2018) uses SDK 2.0. Same applies to AWR1443. (You can refer to [this thread](https://e2e.ti.com/support/sensors/f/1023/t/692195?tisearch=e2e-sitesearch&keymatch=%20user:356347))
-
-3. Clone this repo and ROS serial onto your `<workspace dir>/src`:
-
+1. 搭建 AWR1642BOOST ES2.0 EVM 硬件平台,如下所示, 供电5V/2.5A ,通过USB链接到Ubuntu 18.04 LTS [ROS Melodic](http://wiki.ros.org/melodic).
+![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E7%A1%AC%E4%BB%B6%E4%B8%BB%E8%A7%86%E5%9B%BE1.png)
+2. 从[MMWAVE-SDK](http://www.ti.com/tool/MMWAVE-SDK) 下载 SDK 2.0并使用[UNIFLASH](http://www.ti.com/tool/UNIFLASH)烧录 xwr16xx_mmw_demo.bin.
+3. 将本仓库和ROS serial库下载到<workspace dir>/src`:
 ```
 git clone https://github.com/radar-lab/ti_mmwave_rospkg.git
 git clone https://github.com/wjwwood/serial.git
 ```
-4. Go back to `<workspace dir>`:
+4. 进入`<workspace dir>`:
 
 ```
 catkin_make && source devel/setup.bash
 echo "source <workspace_dir>/devel/setup.bash" >> ~/.bashrc
 ```
 
-5. Enable command and data ports on Linux:
+5. 使能串口:
 ```
 sudo chmod 666 /dev/ttyACM0
 sudo chmod 666 /dev/ttyACM1
 ```
-Note: If multiple sensors are used, enable additional ports `/dev/ttyACM2` and `/dev/ttyACM3`, etc. the same as this step.
-
-6. Launch AWR1642 short range config:
+6. 配置AWR1642探测模式:
 ```
 roslaunch ti_mmwave_rospkg 1642es2_short_range.launch
 ```
-
-Note: If you want to build your own config, use [mmWave Demo Visualizer](https://dev.ti.com/mmwavedemovisualizer) and link the launch file to the config.
-
 7. ROS topics can be accessed as follows:
 ```
 rostopic list
