@@ -9,7 +9,9 @@ AWR1642接收到回波信号以后将数据通过UART传输到ROS节点,通过�
 2. 方案二
 ARM通过共享内存方式获取到DSP得到的点云数据,在ARM上进行点迹凝聚和目标跟踪处理,最终通过串口将点云数据传输到本地电脑上,matlab进行界面绘制.
 ![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E6%96%B9%E6%B3%95%E4%BA%8C.png)
-</br>
+
+
+
 ---
 ### 使用说明(AWR1642BOOST ES2.0 EVM):
 1. 搭建 AWR1642BOOST ES2.0 EVM 硬件平台,如下所示, 供电5V/2.5A ,通过USB链接到Ubuntu 18.04 LTS [ROS Melodic](http://wiki.ros.org/melodic).
