@@ -13,6 +13,8 @@ ARM通过共享内存方式获取到DSP得到的点云数据,在ARM上进行点�
 
 
 ---
+
+
 ### 使用说明(AWR1642BOOST ES2.0 EVM):
 1. 搭建 AWR1642BOOST ES2.0 EVM 硬件平台,如下所示, 供电5V/2.5A ,通过USB链接到Ubuntu 18.04 LTS [ROS Melodic](http://wiki.ros.org/melodic).
 ![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E7%A1%AC%E4%BB%B6%E4%B8%BB%E8%A7%86%E5%9B%BE1.png)
