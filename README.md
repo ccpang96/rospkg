@@ -5,9 +5,11 @@
 1. 方案一
 AWR1642接收到回波信号以后将数据通过UART传输到ROS节点,通过乒乓缓存将该数据保存到本地磁盘存储为csv格式,然后MATLAB通过共享文件夹形式读取到数据,对数据进行凝聚/跟踪处理,最终将数据绘制到界面上.(观察者模式)
 ![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E6%96%B9%E6%B3%95%E4%B8%80.png)
+
 </br>
 2. 方案二
 ARM通过共享内存方式获取到DSP得到的点云数据,在ARM上进行点迹凝聚和目标跟踪处理,最终通过串口将点云数据传输到本地电脑上,matlab进行界面绘制.
+
 ![](https://github.com/ccpang96/rospkg/blob/master/Dcos/%E6%96%B9%E6%B3%95%E4%BA%8C.png)
 
 
